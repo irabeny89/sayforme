@@ -9,7 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "apollo-server-core": "^3.10.0",
+    "apollo-server-micro": "^3.10.0",
+    "graphql": "^16.5.0",
     "jsonwebtoken": "^8.5.1",
+    "micro": "^9.4.0",
     "mongoose": "^6.2.8",
     "next": "12.2.2",
     "react": "18.2.0",
