@@ -6,7 +6,7 @@ export default async function restHandler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.body.action === "register" || req.body.action === "login") {
+  if (req?.body?.action === "register" || req?.body?.action === "login") {
     const action = req.body.action as "register" | "login";
     return handlers[action](req, res);
   }

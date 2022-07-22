@@ -9,7 +9,7 @@ function handleRequestError(error: any, res: NextApiResponse) {
   res.status(500).end(error5xx);
 }
 
-async function handleResponse(
+function handleResponse(
   member: Pick<
     MemberT,
     "hashedPassword" | "email" | "username" | "role" | "salt"
@@ -48,12 +48,12 @@ async function handleRequest(
   }
 }
 
-export default function loginHandler(
+export default async function loginHandler(
   { body, method }: NextApiRequest,
   res: NextApiResponse
 ) {
   if (method == "POST" && validateRequestBody(body, ["email", "password"]))
-    return handleRequest(body, res);
+    return await handleRequest(body, res);
 
   return res.status(400).end(error4xx);
 }

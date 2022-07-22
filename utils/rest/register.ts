@@ -38,7 +38,7 @@ export default async function registerHandler(
     method == "POST" &&
     validateRequestBody(body, ["username", "email", "password"])
   )
-    return handleRequest(body, res);
+    return await handleRequest(body, res);
 
   return res.status(400).end(error4xx);
 }
