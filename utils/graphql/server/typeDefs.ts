@@ -53,6 +53,8 @@ const typeDefs = gql`
   }
   # -- queries --
   type Query {
+    "Test query"
+    hello: String!
     "List of registered members."
     members: [Member]!
     "List of call bookings."
