@@ -1,11 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import apolloServer from "utils/graphql/server";
 
+const startedServer = apolloServer.start()
 export default async function graphqlHandler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  await apolloServer.start()
+  await startedServer
   return await apolloServer.createHandler({ path: "/api/graphql" })(req, res);
 }
 
