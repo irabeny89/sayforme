@@ -1,7 +1,5 @@
 import { error4xx } from "config";
 import { NextApiRequest, NextApiResponse } from "next";
-import handlers from "utils/rest";
-
 /**
  * It handles all REST HTTP requests with `action` field in the request `body` and `POST` method only.
  * @param req HTTP request object decorated by Nextjs
@@ -14,8 +12,8 @@ export default async function restHandler(
 ) {
   if (req?.body?.action === "register" || req?.body?.action === "login") {
     const action = req.body.action as "register" | "login";
-    // property accessor to select handler
-    return handlers[action](req, res);
+    // property accessor to select and call handler
+    return (await import("utils/rest")).default[action](req, res);
   }
   return res.status(400).end(error4xx);
 }
