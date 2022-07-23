@@ -1,5 +1,7 @@
 type RoleT = "ADMIN" | "OPERATOR" | "CUSTOMER";
 
+type BookingStatusT = "PENDING" | "COMPLETE" | "UNCOMPLETE";
+
 type SignAndGetTokenT = Record<"email" | "username" | "role", string>;
 
 type IdAndTimeStampsT = {
@@ -16,4 +18,13 @@ type MemberT = {
   salt: string;
 } & IdAndTimeStampsT;
 
-type MemberDocumentT = mongoose.Document & MemberT
+type MemberDocumentT = mongoose.Document & MemberT;
+
+type CallBookingT = {
+  ownerId: string;
+  serviceStatus: BookingStatusT;
+  message: string;
+  recipientLine: number;
+  callOn: Date;
+  serviceRemark?: string;
+} & IdAndTimeStampsT;
