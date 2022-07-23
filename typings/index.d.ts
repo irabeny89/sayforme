@@ -22,9 +22,9 @@ type MemberDocumentT = mongoose.Document & MemberT;
 
 type CallBookingT = {
   ownerId: string;
-  serviceStatus: BookingStatusT;
+  status: BookingStatusT;
   message: string;
   recipientLine: number;
   callOn: Date;
-  serviceRemark?: string;
+  remark?: string;
 } & IdAndTimeStampsT;

@@ -9,7 +9,7 @@ const schema = new mongoose.Schema(
       ref: "Member",
       required: true,
     },
-    serviceStatus: {
+    status: {
       type: String,
       enum: ["PENDING", "COMPLETE", "UNCOMPLETE"],
       default: "PENDING",
@@ -17,7 +17,7 @@ const schema = new mongoose.Schema(
     message: { type: String, required: true },
     recipientLine: { type: String, required: true },
     callOn: { type: Date, required: true },
-    serviceRemark: String,
+    remark: String,
   },
   { timestamps: true }
 );
