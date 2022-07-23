@@ -3,10 +3,15 @@ import validateRequestBody from "utils/validateRequestBody";
 import { error4xx, error5xx } from "config";
 import signAndGetToken from "utils/signAndGetToken";
 import hashPassword from "utils/hashPassword";
-
+/**
+ * It handles errors thrown when handling the login request.
+ * @param error error thrown by server
+ * @param res Nextjs response object for next response due to error
+ * @returns returns updated response object as a result of the error
+ */
 function handleRequestError(error: any, res: NextApiResponse) {
   console.error(error);
-  res.status(500).end(error5xx);
+  return res.status(500).end(error5xx);
 }
 
 function handleResponse(

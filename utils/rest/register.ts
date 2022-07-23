@@ -3,7 +3,12 @@ import validateRequestBody from "utils/validateRequestBody";
 import { error4xx, error5xx } from "config";
 import signAndGetToken from "utils/signAndGetToken";
 import hashPassword from "utils/hashPassword";
-
+/**
+ * It handles errors thrown when handling the registration request.
+ * @param error error thrown by server
+ * @param res Nextjs response object for next response due to error
+ * @returns returns updated response object as a result of the error
+ */
 function handleRequestError(error: any, res: NextApiResponse) {
   console.error(error);
   return error.code === 11000 || error.message.includes("validation failed")
@@ -18,8 +23,10 @@ async function handleRequest(
   try {
     // start db connection
     await (await import("utils/db")).default();
+
     const salt = (await import("crypto")).randomBytes(16).toString("hex"),
       hashNsalt = hashPassword(password, salt),
+      // register user as new member or db throws error even when user already exist
       { email, username, role } = await (
         await import("utils/db/models/member")
       ).default.create({ ...rest, ...hashNsalt });
