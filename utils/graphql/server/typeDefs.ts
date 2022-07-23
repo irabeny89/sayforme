@@ -62,15 +62,15 @@ const typeDefs = gql`
   }
   type Mutation {
     "Permit a user to be an operator."
-    authorizeOperator(userId: String!): String!
+    authorizeOperator(userId: ID!): String!
     "Demote an operator."
-    denyOperator(userId: String!): String!
+    denyOperator(userId: ID!): String!
     "Create a call booking."
     addCallBooking(booking: CallBookingInputs!): String!
     "Update an existing call booking."
-    editCallBooking(bookingId: String!, booking: CallBookingInputs): String!
+    editCallBooking(bookingId: ID!, booking: CallBookingInputs): String!
     "Update booking to complete status and/or add remark."
-    completeCall(bookingId: String!, remark: String): String!
+    completeCall(bookingId: ID!, remark: String): String!
   }
 `;
 
