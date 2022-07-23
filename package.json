@@ -11,7 +11,6 @@
     "test1": "jest"
   },
   "dependencies": {
-    "apollo-server-core": "^3.10.0",
     "apollo-server-micro": "^3.10.0",
     "graphql": "^16.5.0",
     "jsonwebtoken": "^8.5.1",
