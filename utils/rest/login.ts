@@ -14,7 +14,14 @@ function handleRequestError(error: any, res: NextApiResponse) {
   return res.status(500).end(error5xx);
 }
 
-function handleResponse(
+async function verifyPassword(hashedPass1: string, hashedPass2: string) {
+  return (await import("crypto")).timingSafeEqual(
+    Buffer.from(hashedPass1),
+    Buffer.from(hashedPass2)
+  );
+}
+
+async function handleResponse(
   member: Pick<
     MemberT,
     "hashedPassword" | "email" | "username" | "role" | "salt"
@@ -23,7 +30,10 @@ function handleResponse(
   res: NextApiResponse
 ) {
   return member &&
-    member.hashedPassword === hashPassword(password, member.salt).hashedPassword
+    (await verifyPassword(
+      member.hashedPassword,
+      hashPassword(password, member.salt).hashedPassword
+    ))
     ? res.status(200).end(
         signAndGetToken({
           email: member.email,
@@ -47,7 +57,7 @@ async function handleRequest(
       .select("hashedPassword salt email username role")
       .exec();
 
-    return handleResponse(member, password, res);
+    return await handleResponse(member, password, res);
   } catch (error) {
     handleRequestError(error, res);
   }
