@@ -3,7 +3,7 @@ import restHandler from "pages/api/rest";
 import { error4xx } from "config";
 import handlers from "utils/rest";
 
-jest.mock("../utils/rest");
+jest.mock("utils/rest");
 
 const res = {
   status: jest.fn((statusCode: number) => ({
