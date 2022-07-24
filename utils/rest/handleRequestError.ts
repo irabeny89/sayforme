@@ -9,7 +9,7 @@ import { NextApiResponse } from "next";
  */
 export default function handleRequestError(error: any, res: NextApiResponse) {
   console.error(error);
-  return error.code === 11000 || error.message.includes("validation failed")
+  return error?.code === 11000 || error?.message?.includes("validation failed")
     ? res.status(406).end(error4xx)
     : res.status(500).end(error5xx);
 }
