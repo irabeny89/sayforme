@@ -1,5 +1,6 @@
 import { sign } from "jsonwebtoken";
+import { envVariables } from "config";
 
 export default function signAndGetToken(payload: SignAndGetTokenT) {
-  return sign(payload, process.env.ENCRYPT_SECRET!);
+  return sign(payload, envVariables.tokenSecret);
 }
