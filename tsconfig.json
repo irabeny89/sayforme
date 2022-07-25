@@ -17,8 +17,8 @@
     "baseUrl": ".",
     "paths": {
       "@/models/*": ["utils/db/models/*"],
-      "@/register/*": ["utils/rest/register/*"],
-      "@/login/*": ["utils/rest/login/*"]
+      "@/register/*": ["utils/api/rest/register/*"],
+      "@/login/*": ["utils/api/rest/login/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

@@ -1,7 +1,7 @@
 import { error4xx } from "config";
 import { NextApiResponse } from "next";
 import hashPassword from "utils/hashPassword";
-import signAndGetToken from "utils/rest/register/signAndGetToken";
+import signAndGetToken from "utils/api/rest/register/signAndGetToken";
 import verifyPassword from "./verifyPassword";
 
 export default async function handleResponse(

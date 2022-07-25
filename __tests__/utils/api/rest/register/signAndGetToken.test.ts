@@ -1,4 +1,4 @@
-import signAndGetToken from "utils/rest/register/signAndGetToken";
+import signAndGetToken from "utils/api/rest/register/signAndGetToken";
 // mock environment variables
 jest.mock("config", () => ({ envVariables: { tokenSecret: "mock secret" } }));
 

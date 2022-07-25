@@ -1,6 +1,6 @@
 import { error4xx, error5xx } from "config";
 import { NextApiResponse } from "next";
-import handleRequestError from "utils/rest/handleRequestError";
+import handleRequestError from "utils/api/rest/handleRequestError";
 
 describe("handleRequestError function", () => {
   const res = {

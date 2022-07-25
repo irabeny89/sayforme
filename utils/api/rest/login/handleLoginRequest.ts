@@ -1,5 +1,5 @@
 import { NextApiResponse } from "next";
-import handleRequestError from "utils/rest/handleRequestError";
+import handleRequestError from "utils/api/rest/handleRequestError";
 import handleResponse from "./handleResponse";
 
 export default async function handleRequest(

@@ -1,8 +1,8 @@
 import { NextApiResponse } from "next";
-import handleRequest from "utils/rest/register/handleRegisterRequest";
-import handleRequestError from "utils/rest/handleRequestError";
+import handleRequest from "utils/api/rest/register/handleRegisterRequest";
+import handleRequestError from "utils/api/rest/handleRequestError";
 // mock error handler
-jest.mock("utils/rest/handleRequestError");
+jest.mock("utils/api/rest/handleRequestError");
 // mock db connecction call
 jest.mock("utils/db");
 

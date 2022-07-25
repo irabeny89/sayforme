@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import apolloServer from "utils/graphql/server";
+import apolloServer from "utils/api/graphql/server";
 
 const startedServer = apolloServer.start()
 export default async function graphqlHandler(

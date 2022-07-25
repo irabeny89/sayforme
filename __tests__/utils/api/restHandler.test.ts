@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import restHandler from "pages/api/rest";
 import { error4xx } from "config";
-import handlers from "utils/rest";
+import handlers from "utils/api/rest";
 
-jest.mock("utils/rest");
+jest.mock("utils/api/rest");
 
 const res = {
   status: jest.fn((statusCode: number) => ({

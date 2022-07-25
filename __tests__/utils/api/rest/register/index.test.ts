@@ -1,13 +1,13 @@
 import { error4xx } from "config";
 import { NextApiRequest, NextApiResponse } from "next";
-import registerHandler from "utils/rest/register";
+import registerHandler from "utils/api/rest/register";
 
 jest.mock("utils/validateObjectFields", () => ({
   __esModule: true,
   default: jest.fn(() => true),
 }));
 // the request will respond with `undefined` now
-jest.mock("utils/rest/register/handleRegisterRequest");
+jest.mock("utils/api/rest/register/handleRegisterRequest");
 // invalid methods
 const methods = ["GET", "PUT", "PATCH", "DELETE"],
   res = {

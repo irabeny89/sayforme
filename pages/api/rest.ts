@@ -13,7 +13,7 @@ export default async function restHandler(
   if (req?.body?.action === "register" || req?.body?.action === "login") {
     const action = req.body.action as "register" | "login";
     // property accessor to select and call handler
-    return (await import("utils/rest")).default[action](req, res);
+    return (await import("utils/api/rest")).default[action](req, res);
   }
   return res.status(400).end(error4xx);
 }

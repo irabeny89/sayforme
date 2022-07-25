@@ -1,4 +1,4 @@
-import handlers from "utils/rest";
+import handlers from "utils/api/rest";
 
 describe("REST handlers object", () => {
   it("contains `register` and `login` handlers", () => {
