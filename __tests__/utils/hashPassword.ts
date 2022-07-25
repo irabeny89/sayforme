@@ -1,4 +1,4 @@
-import hashPassword from "utils/hashPassword";
+import hashPassword from "utils/api/rest/hashPassword";
 
 describe("Hashpassword", () => {
   it("hashes password with salt.", () => {

@@ -1,6 +1,6 @@
 import { error4xx } from "config";
 import { NextApiResponse } from "next";
-import hashPassword from "utils/hashPassword";
+import hashPassword from "utils/api/rest/hashPassword";
 import signAndGetToken from "utils/api/rest/register/signAndGetToken";
 import verifyPassword from "./verifyPassword";
 

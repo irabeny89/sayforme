@@ -1,5 +1,5 @@
 import { NextApiResponse } from "next";
-import hashPassword from "utils/hashPassword";
+import hashPassword from "utils/api/rest/hashPassword";
 import handleRequestError from "../handleRequestError";
 import signAndGetToken from "./signAndGetToken";
 

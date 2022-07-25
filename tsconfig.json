@@ -21,6 +21,6 @@
       "@/login/*": ["utils/api/rest/login/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/member/register.tss"],
   "exclude": ["node_modules"]
 }
