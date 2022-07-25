@@ -2,6 +2,8 @@ import { error4xx, error5xx } from "config";
 import { NextApiResponse } from "next";
 import handleRequestError from "utils/api/rest/handleRequestError";
 
+jest.spyOn(console, "error").mockReturnValue(undefined);
+
 describe("handleRequestError function", () => {
   const res = {
     status: (statusCode: number) => ({
@@ -27,7 +29,7 @@ describe("handleRequestError function", () => {
   });
 
   it("responds with `5xx` type error for any other errors.", () => {
-    const error = {  },
+    const error = {},
       response = { statusCode: 500, errorMsg: error5xx };
 
     expect(handleRequestError(error, res)).toMatchObject(response);
