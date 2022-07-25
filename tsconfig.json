@@ -16,7 +16,9 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/models/*": ["utils/db/models/*"]
+      "@/models/*": ["utils/db/models/*"],
+      "@/register/*": ["utils/rest/register/*"],
+      "@/login/*": ["utils/rest/login/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
