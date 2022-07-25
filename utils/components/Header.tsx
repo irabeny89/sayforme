@@ -6,27 +6,29 @@ const { appName } = appData;
 export default function Header() {
   return (
     <header>
-      <h1>{appName}</h1>
+      <h1>
+        <Link href="/">{appName}</Link>
+      </h1>
       <nav>
         <ul>
-          <Link href="/">
-            <li>Home</li>
-          </Link>
-          <Link href="/register">
-            <li>Register</li>
-          </Link>
-          <Link href="/login">
-            <li>Login</li>
-          </Link>
-          <Link href="/admin">
-            <li>Admin</li>
-          </Link>
-          <Link href="/bookings">
-            <li>Bookings</li>
-          </Link>
-          <Link href="/about">
-            <li>About</li>
-          </Link>
+          <li>
+            <Link href="/">Home</Link>
+          </li>
+          <li>
+            <Link href="/register">Register</Link>
+          </li>
+          <li>
+            <Link href="/login">Login</Link>
+          </li>
+          <li>
+            <Link href="/users">Users</Link>
+          </li>
+          <li>
+            <Link href="/bookings">Bookings</Link>
+          </li>
+          <li>
+            <Link href="/about">About</Link>
+          </li>
         </ul>
       </nav>
     </header>

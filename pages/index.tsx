@@ -10,16 +10,8 @@ const Home: NextPage = () => {
       <h2>Introduction</h2>
       <p>{intro[0]}</p>
       <div>
-        <div>
-          <Link href="/register">
-            <button>Register</button>
-          </Link>
-        </div>
-        <div>
-          <Link href="/login">
-            <button>Login</button>
-          </Link>
-        </div>
+        <Link href="/register">Register</Link> or{" "}
+        <Link href="/login">Login</Link>
       </div>
     </div>
   );
