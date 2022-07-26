@@ -2,7 +2,11 @@ type RoleT = "ADMIN" | "OPERATOR" | "CUSTOMER";
 
 type BookingStatusT = "PENDING" | "COMPLETE" | "UNCOMPLETE";
 
-type SignAndGetTokenT = Record<"email" | "username" | "role", string>;
+type SignAndGetTokenT = {
+  email: string;
+  username: string;
+  role: RoleT
+}
 
 type IdAndTimeStampsT = {
   id?: string;
@@ -28,3 +32,13 @@ type CallBookingT = {
   callOn: Date;
   remark?: string;
 } & IdAndTimeStampsT;
+
+type ResponseT = {
+  status: "error" | "ok";
+  code: number;
+  data: any;
+};
+
+type FormDataT = Record<"username" | "email" | "password", string>;
+
+type AuthRequestT = Record<"action", "register" | "login"> & FormDataT;
