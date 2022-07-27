@@ -8,6 +8,7 @@ import { SAYFORMETOKEN } from "config";
 import { verify } from "jsonwebtoken";
 import { envVariables } from "config";
 import { tokenVar } from "utils/api/graphql/client/reactiveVariables";
+import { useReactiveVar } from "@apollo/client";
 
 type LayoutProps = { children: ReactNode };
 
@@ -16,7 +17,8 @@ export default function Layout({ children }: LayoutProps) {
     pageName = getPageName(router.asPath),
     handleLogout = () => (
       localStorage.removeItem(SAYFORMETOKEN), router.push("/")
-    );
+    ),
+    token = useReactiveVar(tokenVar);
 
   useEffect(() => {
     const isProtected = ["BOOKINGS", "USERS"].includes(pageName);
@@ -35,9 +37,7 @@ export default function Layout({ children }: LayoutProps) {
         <title>{pageName}</title>
       </Head>
       <Header />
-      {localStorage.getItem(SAYFORMETOKEN) && (
-        <button onClick={handleLogout}>Logout</button>
-      )}
+      {token && <button onClick={handleLogout}>Logout</button>}
       {children}
       <Footer />
     </main>
