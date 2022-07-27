@@ -7,6 +7,7 @@ import getPageName from "utils/getPageName";
 import { SAYFORMETOKEN } from "config";
 import { verify } from "jsonwebtoken";
 import { envVariables } from "config";
+import { tokenVar } from "utils/api/graphql/client/reactiveVariables";
 
 type LayoutProps = { children: ReactNode };
 
@@ -20,6 +21,8 @@ export default function Layout({ children }: LayoutProps) {
   useEffect(() => {
     const isProtected = ["BOOKINGS", "USERS"].includes(pageName);
     const token = localStorage.getItem(SAYFORMETOKEN);
+    // if token exists, set on global state
+    token && tokenVar(token);
     isProtected &&
       (!token
         ? router.push("/")
@@ -32,7 +35,9 @@ export default function Layout({ children }: LayoutProps) {
         <title>{pageName}</title>
       </Head>
       <Header />
-      <button onClick={handleLogout}>Logout</button>
+      {localStorage.getItem(SAYFORMETOKEN) && (
+        <button onClick={handleLogout}>Logout</button>
+      )}
       {children}
       <Footer />
     </main>
