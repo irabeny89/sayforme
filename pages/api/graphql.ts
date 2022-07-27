@@ -7,15 +7,15 @@ export default async function graphqlHandler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  return !req.headers.authorization
-    ? res.status(403).json({ code: 403, message: "Forbidden.", type: "error" })
-    : !(await import("jsonwebtoken")).verify(
-        req.headers.authorization!.replace("Bearer ", ""),
-        envVariables.tokenSecret
-      )
-    ? res.status(403).json({ code: 403, message: "Forbidden.", type: "error" })
-    : (await startedServer,
-      await apolloServer.createHandler({ path: "/api/graphql" })(req, res));
+  const token = req.headers.authorization?.replace("Bearer ", ""),
+    verified =
+      token &&
+      (await import("jsonwebtoken")).verify(token, envVariables.tokenSecret);
+
+  return verified
+    ? (await startedServer,
+      await apolloServer.createHandler({ path: "/api/graphql" })(req, res))
+    : res.status(403).json({ code: 403, message: "Forbidden.", type: "error" });
 }
 
 export const config = { api: { bodyParser: false } };

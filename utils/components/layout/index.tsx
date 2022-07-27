@@ -16,7 +16,7 @@ export default function Layout({ children }: LayoutProps) {
   const router = useRouter(),
     pageName = getPageName(router.asPath),
     handleLogout = () => (
-      localStorage.removeItem(SAYFORMETOKEN), router.push("/")
+      localStorage.removeItem(SAYFORMETOKEN), tokenVar(""), router.push("/")
     ),
     token = useReactiveVar(tokenVar);
 
@@ -29,7 +29,7 @@ export default function Layout({ children }: LayoutProps) {
       (!token
         ? router.push("/")
         : !verify(token, envVariables.tokenSecret) && router.push("/"));
-  }, [pageName]);
+  }, [pageName, token]);
 
   return (
     <main>

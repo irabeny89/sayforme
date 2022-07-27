@@ -11,7 +11,7 @@ export const envVariables = {
 };
 
 export const appData = {
-  appName: "SayforMe",
+  appName: "SayForMe",
   version: "1.0",
   intro: [
     "If you want to call someone but you don't want to forget especially because it's their birthday, love message or something, then let SayForMe do it for you. Be a member today and register or login if you're already a member.",

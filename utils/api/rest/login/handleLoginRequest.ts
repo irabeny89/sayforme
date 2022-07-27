@@ -1,6 +1,7 @@
 import { NextApiResponse } from "next";
 import handleRequestError from "utils/api/rest/handleRequestError";
 import handleResponse from "./handleResponse";
+import startDb from "utils/db"
 
 export default async function handleRequest(
   { email, password }: Record<"email" | "password", string>,
@@ -8,7 +9,7 @@ export default async function handleRequest(
 ) {
   try {
     // start db connection
-    await (await import("utils/db")).default();
+    await startDb();
     const member = await (await import("utils/db/models/member")).default
       .findOne({ email })
       .lean()
