@@ -1,4 +1,3 @@
-import { envVariables } from "config";
 import { NextApiRequest, NextApiResponse } from "next";
 import apolloServer from "utils/api/graphql/server";
 
@@ -9,8 +8,7 @@ export default async function graphqlHandler(
 ) {
   const token = req.headers.authorization?.replace("Bearer ", ""),
     verified =
-      token &&
-      (await import("jsonwebtoken")).verify(token, envVariables.tokenSecret);
+      token && (await import("utils/verifyJwtToken")).default(token);
 
   return verified
     ? (await startedServer,
