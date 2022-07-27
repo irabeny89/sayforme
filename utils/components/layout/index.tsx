@@ -5,10 +5,12 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import getPageName from "utils/getPageName";
 import { SAYFORMETOKEN } from "config";
-import { verify } from "jsonwebtoken";
-import { envVariables } from "config";
-import { tokenVar } from "utils/api/graphql/client/reactiveVariables";
+import {
+  tokenPayloadVar,
+  tokenVar,
+} from "utils/api/graphql/client/reactiveVariables";
 import { useReactiveVar } from "@apollo/client";
+import verifyJwtToken from "utils/verifyJwtToken";
 
 type LayoutProps = { children: ReactNode };
 
@@ -21,14 +23,16 @@ export default function Layout({ children }: LayoutProps) {
     token = useReactiveVar(tokenVar);
 
   useEffect(() => {
-    const isProtected = ["BOOKINGS", "USERS"].includes(pageName);
-    const token = localStorage.getItem(SAYFORMETOKEN);
-    // if token exists, set on global state
-    token && tokenVar(token);
-    isProtected &&
-      (!token
-        ? router.push("/")
-        : !verify(token, envVariables.tokenSecret) && router.push("/"));
+    // if current page name is a protected page
+    const isProtected = ["BOOKINGS", "USERS"].includes(pageName),
+      token = localStorage.getItem(SAYFORMETOKEN),
+      verifiedPayload = verifyJwtToken(token);
+    // if valid token exists, set on global state
+    tokenVar(token ?? "");
+    // update global state if payload exist
+    tokenPayloadVar(verifiedPayload as SignAndGetTokenT | undefined | null);
+    // redirect to home page for unauth users
+    isProtected && !verifiedPayload && router.push("/");
   }, [pageName, token]);
 
   return (
