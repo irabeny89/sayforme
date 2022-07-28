@@ -67,3 +67,16 @@ type BookingCompleteButtonVariableT = { bookingId: string; remark?: string };
 
 type BookingEditButtonVariableT = BookingFormQueryVariablesT &
   Record<"bookingId", string>;
+
+type UserT = Pick<MemberT, "email" | "role" | "username"> &
+  Record<"id", string>;
+
+type UsersQueryT = Record<"members", UserT[]>;
+
+type UsersTableRowT = UserT & Record<"index", number>;
+
+type UserQueryT = Record<
+  "getMember",
+  Pick<MemberT, "email" | "role" | "username"> &
+    Record<keyof IdAndTimeStampsT, string>
+>;

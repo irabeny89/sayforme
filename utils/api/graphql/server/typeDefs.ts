@@ -64,8 +64,10 @@ const typeDefs = gql`
     hello: String!
     "Return user profile"
     whoami: Member!
-    "List of registered members."
+    "Only ADMIN can get list of registered members."
     members: [Member]!
+    "Only ADMIN can get a user data."
+    getMember(userId: ID!): Member
     "Get a booking."
     getCallBooking(bookingId: ID!): CallBooking
     "List of call bookings."
@@ -73,9 +75,9 @@ const typeDefs = gql`
   }
   type Mutation {
     "Only an ADMIN can permit a user/CUSTOMER to be an OPERATOR."
-    authorizeOperator(userId: ID!): String!
+    authorizeUser(userId: ID!): String!
     "Only ADMIN can demote an operator back to CUSTOMER."
-    denyOperator(userId: ID!): String!
+    denyUser(userId: ID!): String!
     "Create a call booking."
     addCallBooking(booking: CallBookingInputs!): String!
     "Only owner/CUSTOMER can update their call booking."

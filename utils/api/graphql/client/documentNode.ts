@@ -30,6 +30,26 @@ const CALL_BOOKING_FRAGMENT = gql`
   }
 `;
 
+export const MEMBERS = gql`
+  query Members {
+    members {
+      id
+      email
+      username
+      role
+    }
+  }
+`;
+
+export const GET_MEMBER = gql`
+  ${MEMBER_FRAGMENT}
+  query GetMember($userId: ID!) {
+    getMember(userId: $userID) {
+      ...MemberDocumentT
+    }
+  }
+`;
+
 export const GET_CALL_BOOKING = gql`
   ${CALL_BOOKING_FRAGMENT}
   query GetCallBooking($bookingId: ID!) {
@@ -71,5 +91,17 @@ export const EDIT_CALL_BOOKING = gql`
 export const COMPLETE_CALL = gql`
   mutation CompleteCall($bookingId: ID!, $remark: String) {
     completeCall(bookingId: $bookingId, remark: $remark)
+  }
+`;
+
+export const AUTHORIZE_USER = gql`
+  mutation AuthorizeOperator($userId: ID!) {
+    authorizeUser(userId: $userId)
+  }
+`;
+
+export const DENY_USER = gql`
+  mutation DenyUser($userId: ID!) {
+    denyUser(userId: $userId)
   }
 `;
