@@ -5,8 +5,10 @@ type BookingStatusT = "PENDING" | "COMPLETE" | "UNCOMPLETE";
 type SignAndGetTokenT = {
   email: string;
   username: string;
-  role: RoleT
-}
+  role: RoleT;
+  iat?: number;
+  exp?: number;
+};
 
 type IdAndTimeStampsT = {
   id?: string;
@@ -26,9 +28,10 @@ type MemberDocumentT = mongoose.Document & MemberT;
 
 type CallBookingT = {
   ownerId: string;
+  handlerId: string;
   status: BookingStatusT;
   message: string;
-  recipientLine: number;
+  recipientLine: string;
   callOn: Date;
   remark?: string;
 } & IdAndTimeStampsT;
@@ -42,3 +45,25 @@ type ResponseT = {
 type FormDataT = Record<"username" | "email" | "password", string>;
 
 type AuthRequestT = Record<"action", "register" | "login"> & FormDataT;
+
+type BookingTableRowPropsT = Record<"index", number> &
+  Pick<CallBookingT, "recipientLine" | "status"> &
+  Record<"callOn" | "id", string>;
+
+type BookingsQueryT = Record<"callBookings", BookingTablePropsT[]>;
+
+type BookingQueryT = Record<"getCallBooking", BookingTablePropsT>;
+
+type BookingFormQueryVariablesT = Record<
+  "booking",
+  Record<"recipientLine" | "message" | "callOn", string>
+>;
+
+type BookingFormPropsT = {
+  handleCloseModal: () => void;
+};
+
+type BookingCompleteButtonVariableT = { bookingId: string; remark?: string };
+
+type BookingEditButtonVariableT = BookingFormQueryVariablesT &
+  Record<"bookingId", string>;

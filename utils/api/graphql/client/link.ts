@@ -7,13 +7,12 @@ import { SAYFORMETOKEN } from "config";
 const errorLink = onError(({ graphQLErrors, networkError }) => {
     networkError &&
       console.error(
-        "Network Error: %s | %s | %s | %s",
-        networkError.name,
+        "Network Error: %s | %s | %s",
         networkError.cause,
-        networkError.stack,
-        networkError.message
+        networkError.message,
+        networkError.name
       );
-    graphQLErrors && console.error("GraphQL Error:", graphQLErrors.toString());
+    graphQLErrors && console.error("GraphQL Error:", graphQLErrors);
   }),
   httpLink = new HttpLink({
     uri: "api/graphql",

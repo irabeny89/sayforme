@@ -11,19 +11,65 @@ const MEMBER_FRAGMENT = gql`
   }
 `;
 
-export const CALL_BOOKING_LIST = gql`
-  ${MEMBER_FRAGMENT}
-  query CallBookingList {
+const CALL_BOOKING_FRAGMENT = gql`
+  fragment CallBookingFields on CallBooking {
+    id
+    owner {
+      id
+    }
+    handler {
+      id
+    }
+    status
+    message
+    recipientLine
+    callOn
+    remark
+    createdAt
+    updatedAt
+  }
+`;
+
+export const GET_CALL_BOOKING = gql`
+  ${CALL_BOOKING_FRAGMENT}
+  query GetCallBooking($bookingId: ID!) {
+    getCallBooking(bookingId: $bookingId) {
+      ...CallBookingFields
+    }
+  }
+`;
+
+export const BOOKINGS_TABLE = gql`
+  query CallBookings {
     callBookings {
       id
-      owner {
-        ...MemberFields
-      }
       status
-      message
-      recipientLine
       callOn
-      remark
+      recipientLine
     }
+  }
+`;
+
+export const HANDLE_CALL_BOOKING = gql`
+  mutation HandleCallBooking($bookingId: ID!) {
+    handleCallBooking(bookingId: $bookingId)
+  }
+`;
+
+export const ADD_CALL_BOOKING = gql`
+  mutation AddCallBooking($booking: CallBookingInputs!) {
+    addCallBooking(booking: $booking)
+  }
+`;
+
+export const EDIT_CALL_BOOKING = gql`
+  mutation EditCallBooking($bookingId: ID!, $booking: CallBookingInputs!) {
+    editCallBooking(bookingId: $bookingId, booking: $booking)
+  }
+`;
+
+export const COMPLETE_CALL = gql`
+  mutation CompleteCall($bookingId: ID!, $remark: String) {
+    completeCall(bookingId: $bookingId, remark: $remark)
   }
 `;

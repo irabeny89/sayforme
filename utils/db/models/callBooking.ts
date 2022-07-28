@@ -9,6 +9,10 @@ const schema = new mongoose.Schema(
       ref: "Member",
       required: true,
     },
+    handlerId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Member",
+    },
     status: {
       type: String,
       enum: ["PENDING", "COMPLETE", "UNCOMPLETE"],

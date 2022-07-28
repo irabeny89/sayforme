@@ -18,6 +18,7 @@ const typeDefs = gql`
     id: ID!
     "Authorized role."
     role: RoleOptions!
+    "User email address."
     email: String!
     "Alias used on the app."
     username: String!
@@ -36,18 +37,24 @@ const typeDefs = gql`
     "Message to be read to the recipient."
     message: String!
     "Number to call before reading message."
-    recipientLine: Int!
+    recipientLine: String!
     "Date to call the recipient of the message."
     callOn: String!
+    "The operator ID handling the call booking."
+    handler: Member
     "Optional message to the call booker i.e owner."
     remark: String
+    "Date call booking was made."
+    createdAt: String!
+    "Date call booking was edited."
+    updatedAt: String!
   }
   # -- inputs --
   input CallBookingInputs {
     "Message to be sent to the recipient."
     message: String!
     "The number to call for message delivery."
-    recipientLine: Int!
+    recipientLine: String!
     "Date to call the recipient."
     callOn: String!
   }
@@ -59,19 +66,23 @@ const typeDefs = gql`
     whoami: Member!
     "List of registered members."
     members: [Member]!
+    "Get a booking."
+    getCallBooking(bookingId: ID!): CallBooking
     "List of call bookings."
     callBookings: [CallBooking]!
   }
   type Mutation {
-    "Permit a user to be an operator."
+    "Only an ADMIN can permit a user/CUSTOMER to be an OPERATOR."
     authorizeOperator(userId: ID!): String!
-    "Demote an operator."
+    "Only ADMIN can demote an operator back to CUSTOMER."
     denyOperator(userId: ID!): String!
     "Create a call booking."
     addCallBooking(booking: CallBookingInputs!): String!
-    "Update an existing call booking."
+    "Only owner/CUSTOMER can update their call booking."
     editCallBooking(bookingId: ID!, booking: CallBookingInputs): String!
-    "Update booking to complete status and/or add remark."
+    "Only ADMIN & OPERATOR can accept to handle a call booking."
+    handleCallBooking(bookingId: ID!): String!
+    "Only ADMIN & OPERATOR can update booking to COMPLETE status and/or add remark."
     completeCall(bookingId: ID!, remark: String): String!
   }
 `;
