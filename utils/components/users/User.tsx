@@ -1,31 +1,31 @@
-import { useQuery, useReactiveVar } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { error5xx } from "config";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { GET_MEMBER } from "utils/api/graphql/client/documentNode";
-import { tokenPayloadVar } from "utils/api/graphql/client/reactiveVariables";
+import createDateString from "utils/createDateString";
 import UserAuthorizeButton from "./UserAuthorizeButton";
 import UserDenyButton from "./UserDenyButton";
 
 export default function User() {
-  const payload = useReactiveVar(tokenPayloadVar),
-    isAuth = payload?.role !== "CUSTOMER",
-    { query } = useRouter(),
-    userId = query.id as string,
+  const { query } = useRouter(),
+    userId = query && (query.id as string[])[0],
     { loading, error, data } = useQuery<UserQueryT, Record<"userId", string>>(
       GET_MEMBER,
       { variables: { userId } }
     );
 
   if (data) {
-    const { createdAt, email, id, role, updatedAt, username } = data.getMember;
+    const { createdAt, email, id, role, updatedAt, username } = data.getMember,
+      authAble = role === "CUSTOMER",
+      deniable = role === "OPERATOR";
 
     return (
       <div>
         <h2>User Details</h2>
         <p>Details of the user on the platform.</p>
-        {!isAuth && <UserAuthorizeButton userId={userId} />}
-        {isAuth && <UserDenyButton userId={userId} />}
+        {authAble && <UserAuthorizeButton userId={userId} />}
+        {deniable && <UserDenyButton userId={userId} />}
         <dl>
           <dt>ID</dt>
           <dd>{id}</dd>
@@ -36,9 +36,9 @@ export default function User() {
           <dt>Email</dt>
           <dd>{email}</dd>
           <dt>Joined on</dt>
-          <dd>{createdAt}</dd>
+          <dd>{createDateString(createdAt)}</dd>
           <dt>Updated At</dt>
-          <dd>{updatedAt}</dd>
+          <dd>{createDateString(updatedAt)}</dd>
         </dl>
       </div>
     );

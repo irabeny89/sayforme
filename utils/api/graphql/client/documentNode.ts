@@ -44,8 +44,8 @@ export const MEMBERS = gql`
 export const GET_MEMBER = gql`
   ${MEMBER_FRAGMENT}
   query GetMember($userId: ID!) {
-    getMember(userId: $userID) {
-      ...MemberDocumentT
+    getMember(userId: $userId) {
+      ...MemberFields
     }
   }
 `;
