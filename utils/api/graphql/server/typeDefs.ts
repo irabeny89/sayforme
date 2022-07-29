@@ -40,7 +40,7 @@ const typeDefs = gql`
     recipientLine: String!
     "Date to call the recipient of the message."
     callOn: String!
-    "The operator ID handling the call booking."
+    "The operator handling the call booking."
     handler: Member
     "Optional message to the call booker i.e owner."
     remark: String
@@ -62,15 +62,15 @@ const typeDefs = gql`
   type Query {
     "Test query"
     hello: String!
-    "Return user profile"
-    whoami: Member!
+    "Return user profile. All user can access."
+    whoami: Member
     "Only ADMIN can get list of registered members."
     members: [Member]!
     "Only ADMIN can get a user data."
     getMember(userId: ID!): Member
-    "Get a booking."
+    "Get a booking. All users has access."
     getCallBooking(bookingId: ID!): CallBooking
-    "List of call bookings."
+    "List of call bookings. All users has access."
     callBookings: [CallBooking]!
   }
   type Mutation {
@@ -78,11 +78,11 @@ const typeDefs = gql`
     authorizeUser(userId: ID!): String!
     "Only ADMIN can demote an operator back to CUSTOMER."
     denyUser(userId: ID!): String!
-    "Create a call booking."
+    "Create a call booking. All users can create."
     addCallBooking(booking: CallBookingInputs!): String!
-    "Only owner/CUSTOMER can update their call booking."
+    "Only owner can update their call booking."
     editCallBooking(bookingId: ID!, booking: CallBookingInputs): String!
-    "Only ADMIN & OPERATOR can accept to handle a call booking."
+    "Only ADMIN & OPERATOR can handle a call booking."
     handleCallBooking(bookingId: ID!): String!
     "Only ADMIN & OPERATOR can update booking to COMPLETE status and/or add remark."
     completeCall(bookingId: ID!, remark: String): String!
