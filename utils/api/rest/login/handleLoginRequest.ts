@@ -1,7 +1,7 @@
 import { NextApiResponse } from "next";
 import handleRequestError from "utils/api/rest/handleRequestError";
 import handleResponse from "./handleResponse";
-import startDb from "utils/db"
+import startDb from "utils/db";
 
 export default async function handleRequest(
   { email, password }: Record<"email" | "password", string>,
@@ -12,8 +12,7 @@ export default async function handleRequest(
     await startDb();
     const member = await (await import("utils/db/models/member")).default
       .findOne({ email })
-      .lean()
-      .select("hashedPassword salt email username role")
+      .select("hashedPassword salt email username role id")
       .exec();
 
     return await handleResponse(member, password, res);

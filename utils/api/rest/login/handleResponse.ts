@@ -1,13 +1,13 @@
 import { error4xx } from "config";
 import { NextApiResponse } from "next";
 import hashPassword from "utils/api/rest/hashPassword";
-import signAndGetToken from "utils/api/rest/register/signAndGetToken";
+import signAndGetToken from "utils/api/rest/signAndGetToken";
 import verifyPassword from "./verifyPassword";
 
 export default async function handleResponse(
   member: Pick<
     MemberT,
-    "hashedPassword" | "email" | "username" | "role" | "salt"
+    "hashedPassword" | "email" | "username" | "role" | "salt" | "id"
   > | null,
   password: string,
   res: NextApiResponse
@@ -22,6 +22,7 @@ export default async function handleResponse(
           email: member.email,
           username: member.username,
           role: member.role,
+          userId: member.id!,
         })
       )
     : res.status(400).end(error4xx);
