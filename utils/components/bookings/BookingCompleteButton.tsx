@@ -9,11 +9,12 @@ import { tokenPayloadVar } from "utils/api/graphql/client/reactiveVariables";
 
 export default function BookingCompleteButton({
   bookingId,
-}: Record<"bookingId", string>) {
+  status,
+}: BookingCompleteButtonPropsT) {
   const payload = useReactiveVar(tokenPayloadVar),
-  [openModal, setOpenModal] = useState(false),
+    [openModal, setOpenModal] = useState(false),
     // when double-inverted it returns false for customer role
-    isPermitted = payload?.role !== "CUSTOMER",
+    isPermitted = payload?.role !== "CUSTOMER" && status !== "PENDING",
     [completeCall, { loading, error, reset }] = useMutation<
       Record<"completeCall", string>,
       BookingCompleteButtonVariableT
@@ -28,7 +29,7 @@ export default function BookingCompleteButton({
         variables: { bookingId, remark },
         refetchQueries: [GET_CALL_BOOKING],
       });
-      handleModalClose()
+      handleModalClose();
     };
 
   useEffect(() => {
@@ -49,14 +50,15 @@ export default function BookingCompleteButton({
             name="remark"
             placeholder="Any remark or note for the owner"
           />
-          <button type="submit" disabled={loading}>Completed Call</button>
+          <button type="submit" disabled={loading}>
+            Completed Call
+          </button>
         </form>
+        <button onClick={() => setOpenModal(false)}>X</button>
       </dialog>
       {error && <i>{error5xx}</i>}
       {!!isPermitted && (
-        <button onClick={() => setOpenModal(true)}>
-          Complete
-        </button>
+        <button onClick={() => setOpenModal(true)}>Complete</button>
       )}
     </div>
   );

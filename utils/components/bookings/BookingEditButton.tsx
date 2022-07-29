@@ -53,10 +53,11 @@ export default function BookingEditButton({
             Completed Call
           </button>
         </form>
+        <button onClick={() => setOpenModal(false)}>X</button>
       </dialog>
       {error && <i>{error5xx}</i>}
       {!!isPermitted && (
-        <button onClick={() => setOpenModal(true)}>Complete</button>
+        <button onClick={() => setOpenModal(true)}>Edit</button>
       )}
     </div>
   );

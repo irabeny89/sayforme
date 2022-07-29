@@ -9,10 +9,11 @@ import { tokenPayloadVar } from "utils/api/graphql/client/reactiveVariables";
 
 export default function BookingHandleButton({
   bookingId,
-}: Record<"bookingId", string>) {
+  handlerId,
+}: BookingHandleButtonT) {
   const payload = useReactiveVar(tokenPayloadVar),
     // when double-inverted it returns false for customer role
-    isPermitted = payload?.role !== "CUSTOMER",
+    isPermitted = payload?.role !== "CUSTOMER" && !handlerId,
     [handleCallBooking, { loading, error, reset }] = useMutation<
       Record<"addCallBooking", string>,
       Record<"bookingId", string>
@@ -30,7 +31,7 @@ export default function BookingHandleButton({
     <div>
       {error && <i>{error5xx}</i>}
       {!!isPermitted && (
-        <button onClick={() => handleCallBooking} disabled={loading}>
+        <button onClick={() => handleCallBooking()} disabled={loading}>
           {loading ? <i>wait...</i> : "Handle"}
         </button>
       )}

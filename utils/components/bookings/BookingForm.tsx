@@ -1,10 +1,13 @@
 import { useMutation } from "@apollo/client";
 import { error5xx } from "config";
 import { FormEvent, useEffect } from "react";
-import { ADD_CALL_BOOKING } from "utils/api/graphql/client/documentNode";
+import {
+  ADD_CALL_BOOKING,
+  BOOKINGS_TABLE,
+} from "utils/api/graphql/client/documentNode";
 
 export default function BookingForm({ handleCloseModal }: BookingFormPropsT) {
-  const [addCallBooking, { loading, error, data, reset }] = useMutation<
+  const [addCallBooking, { loading, error, reset }] = useMutation<
       Record<"addCallBooking", string>,
       BookingFormQueryVariablesT
     >(ADD_CALL_BOOKING),
@@ -14,7 +17,10 @@ export default function BookingForm({ handleCloseModal }: BookingFormPropsT) {
         new FormData(e.currentTarget)
       ) as BookingFormQueryVariablesT["booking"];
 
-      await addCallBooking({ variables: { booking } });
+      await addCallBooking({
+        variables: { booking },
+        refetchQueries: [BOOKINGS_TABLE],
+      });
       handleCloseModal();
     };
 

@@ -10,6 +10,10 @@ export default function BookingsTable() {
     <i>Loading...</i>
   ) : error ? (
     <i>{error5xx}</i>
+  ) : !data?.callBookings.length ? (
+    <small>
+      <i>No booking yet</i>
+    </small>
   ) : (
     <small>
       <table>
