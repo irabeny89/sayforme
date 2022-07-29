@@ -5,13 +5,7 @@ import { setContext } from "@apollo/client/link/context";
 import { SAYFORMETOKEN } from "config";
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
-    networkError &&
-      console.error(
-        "Network Error: %s | %s | %s",
-        networkError.cause,
-        networkError.message,
-        networkError.name
-      );
+    networkError && console.error("Network Error:", networkError);
     graphQLErrors && console.error("GraphQL Error:", graphQLErrors);
   }),
   httpLink = new HttpLink({
