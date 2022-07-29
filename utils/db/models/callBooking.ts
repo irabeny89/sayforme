@@ -4,12 +4,12 @@ type CallBookingDocumentT = mongoose.Document & CallBookingT;
 
 const schema = new mongoose.Schema(
   {
-    ownerId: {
+    owner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Member",
       required: true,
     },
-    handlerId: {
+    handler: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Member",
     },
