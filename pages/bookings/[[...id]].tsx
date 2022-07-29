@@ -3,10 +3,13 @@ import Bookings from "utils/components/bookings";
 import Booking from "utils/components/bookings/Booking";
 
 export default function BookingRoutes() {
-  const { query } = useRouter();
-  return !Object.keys(query).length ? (
+  const { query } = useRouter(),
+    routeHasQueryParams = Object.keys(query).length,
+    queryParams = query && (query.id as string[]);
+
+  return !routeHasQueryParams ? (
     <Bookings />
   ) : (
-    <Booking bookingId={query.id as string} />
+    <Booking bookingId={queryParams[0]} />
   );
 }
