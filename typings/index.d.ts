@@ -2,13 +2,17 @@ type RoleT = "ADMIN" | "OPERATOR" | "CUSTOMER";
 
 type BookingStatusT = "PENDING" | "COMPLETE" | "UNCOMPLETE";
 
-type SignAndGetTokenT = {
+type PayloadT = {
   email: string;
   username: string;
   role: RoleT;
+  userId: string;
+};
+
+type SignAndGetTokenT = {
   iat?: number;
   exp?: number;
-};
+} & PayloadT;
 
 type IdAndTimeStampsT = {
   id?: string;
@@ -27,8 +31,8 @@ type MemberT = {
 type MemberDocumentT = mongoose.Document & MemberT;
 
 type CallBookingT = {
-  ownerId: string;
-  handlerId: string;
+  owner: string;
+  handler: string;
   status: BookingStatusT;
   message: string;
   recipientLine: string;
@@ -46,18 +50,19 @@ type FormDataT = Record<"username" | "email" | "password", string>;
 
 type AuthRequestT = Record<"action", "register" | "login"> & FormDataT;
 
-type BookingTableRowPropsT = Record<"index", number> &
-  Pick<CallBookingT, "recipientLine" | "status"> &
-  Record<"callOn" | "id", string>;
+type CallBookingInputT = Record<"recipientLine" | "message" | "callOn", string>;
+
+type BookingTableRowPropsT = CallBookingInputT & {
+  index: number;
+  status: BookingStatusT;
+  id: string;
+};
 
 type BookingsQueryT = Record<"callBookings", BookingTablePropsT[]>;
 
 type BookingQueryT = Record<"getCallBooking", BookingTablePropsT>;
 
-type BookingFormQueryVariablesT = Record<
-  "booking",
-  Record<"recipientLine" | "message" | "callOn", string>
->;
+type BookingFormQueryVariablesT = Record<"booking", CallBookingInputT>;
 
 type BookingFormPropsT = {
   handleCloseModal: () => void;
@@ -80,3 +85,15 @@ type UserQueryT = Record<
   Pick<MemberT, "email" | "role" | "username"> &
     Record<keyof IdAndTimeStampsT, string>
 >;
+
+type CompleteCallT = { bookingId: string; remark?: string };
+
+type BookingCompleteButtonPropsT = {
+  bookingId: string;
+  status: BookingStatusT;
+};
+
+type BookingHandleButtonT = {
+  bookingId: string;
+  handlerId: string | undefined;
+};
