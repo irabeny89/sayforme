@@ -9,7 +9,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
     graphQLErrors && console.error("GraphQL Error:", graphQLErrors);
   }),
   httpLink = new HttpLink({
-    uri: "api/graphql",
+    uri: "/api/graphql",
   }),
   authLink = setContext((_, { headers }) => {
     const token = localStorage.getItem(SAYFORMETOKEN),
