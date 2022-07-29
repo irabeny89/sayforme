@@ -1,0 +1,20 @@
+POST http://localhost:3000/api/rest HTTP/1.1
+Content-Type: application/json
+
+{
+  "action": "register",
+  "username": "John",
+  "email": "johndoe@gmail.com",
+  "password": "sayforme"
+}
+
+###
+
+POST http://localhost:3000/api/rest HTTP/1.1
+Content-Type: application/json
+
+{
+  "action": "login",
+  "email": "irabeny89@gmail.com",
+  "password": "sayforme"
+}
