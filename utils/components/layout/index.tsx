@@ -18,7 +18,9 @@ export default function Layout({ children }: LayoutProps) {
   const router = useRouter(),
     pageName = getPageName(router.asPath),
     handleLogout = () => (
-      localStorage.removeItem(SAYFORMETOKEN), tokenVar(""), router.push("/")
+      localStorage.removeItem(SAYFORMETOKEN),
+      tokenVar(""),
+      router.push("/").then(() => location.reload())
     ),
     token = useReactiveVar(tokenVar);
 
