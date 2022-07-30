@@ -5,8 +5,8 @@ export const error5xx = "Something went wrong.";
 export const SAYFORMETOKEN = "sayforme";
 
 export const envVariables = {
-  dbAtlas:
-    "mongodb+srv://vercel-admin-user:ax80z2imNIXcMsJf@cluster0.fhw58.mongodb.net/admin",
+  dbAtlasVercel: process.env.MONGODB_URI!,
+  dbAtlas: process.env.MONGO_ATLAS!,
   dbCompass: process.env.DB_COMPASS!,
   tokenSecret:
     process.env.ENCRYPT_SECRET! || process.env.NEXT_PUBLIC_ENCRYPT_SECRET!,
