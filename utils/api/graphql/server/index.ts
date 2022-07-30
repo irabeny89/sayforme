@@ -6,7 +6,8 @@ import typeDefs from "./typeDefs";
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
-  context
+  context,
+  cache: "bounded"
 });
 
 export default apolloServer;
