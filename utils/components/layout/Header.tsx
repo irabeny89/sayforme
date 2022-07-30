@@ -35,9 +35,11 @@ export default function Header() {
               <Link href="/bookings">Bookings</Link>
             </li>
           )}
-          <li>
-            <Link href="/profile">Profile</Link>
-          </li>
+          {payload?.email && (
+            <li>
+              <Link href="/profile">Profile</Link>
+            </li>
+          )}
           <li>
             <Link href="/about">About</Link>
           </li>
