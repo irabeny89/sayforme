@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { error5xx } from "config";
+import Link from "next/link";
 import { WHO_AM_I } from "utils/api/graphql/client/documentNode";
 import createDateString from "utils/createDateString";
 
@@ -34,7 +35,7 @@ export default function Profile() {
     </small>
   ) : error ? (
     <small>
-      <i>{error5xx}</i>
+      <i>{error5xx} <Link href="/">Go Home page</Link></i>
     </small>
   ) : null;
 }
