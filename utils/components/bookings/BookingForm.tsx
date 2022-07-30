@@ -27,7 +27,7 @@ export default function BookingForm({ handleCloseModal }: BookingFormPropsT) {
   useEffect(() => {
     const timerId = setTimeout(reset, 5e4);
     return clearTimeout(timerId);
-  }, [error]);
+  }, [error, reset]);
 
   return (
     <form onSubmit={handleSubmit}>
