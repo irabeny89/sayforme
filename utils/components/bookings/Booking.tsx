@@ -41,7 +41,7 @@ export default function Booking({ bookingId }: Record<"bookingId", string>) {
           <dt>Owner ID:</dt>
           <dd>{ownerId}</dd>
           <dt>Call On:</dt>
-          <dd>{callOn}</dd>
+          <dd>{createDateString(callOn)}</dd>
           <dt>Recipient Line:</dt>
           <dd>{recipientLine}</dd>
           <dt>Message:</dt>
