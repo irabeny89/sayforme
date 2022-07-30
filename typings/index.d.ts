@@ -91,6 +91,7 @@ type CompleteCallT = { bookingId: string; remark?: string };
 type BookingCompleteButtonPropsT = {
   bookingId: string;
   status: BookingStatusT;
+  callOn: string;
 };
 
 type BookingHandleButtonT = {
