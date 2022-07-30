@@ -74,7 +74,7 @@ type BookingEditButtonVariableT = BookingFormQueryVariablesT &
   Record<"bookingId", string>;
 
 type UserT = Pick<MemberT, "email" | "role" | "username"> &
-  Record<"id", string>;
+  Record<"id" | "createdAt" | "updatedAt", string>;
 
 type UsersQueryT = Record<"members", UserT[]>;
 

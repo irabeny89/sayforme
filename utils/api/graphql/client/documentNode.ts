@@ -30,6 +30,15 @@ const CALL_BOOKING_FRAGMENT = gql`
   }
 `;
 
+export const WHO_AM_I = gql`
+  ${MEMBER_FRAGMENT}
+  query WhoAmI {
+    whoami {
+      ...MemberFields
+    }
+  }
+`
+
 export const MEMBERS = gql`
   query Members {
     members {
