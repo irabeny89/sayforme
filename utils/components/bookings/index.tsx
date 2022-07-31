@@ -1,6 +1,6 @@
 import { useState } from "react";
 import BookingsTable from "utils/components/bookings/BookingsTable";
-import BookingForm from "./BookingForm";
+import AddBookingForm from "./AddBookingForm";
 
 export default function Bookings() {
   const [openModal, setOpenModal] = useState(false),
@@ -14,7 +14,7 @@ export default function Bookings() {
       <dialog open={openModal}>
         <h3>Booking</h3>
         <p>Fill the form below to create a booking:</p>
-        <BookingForm handleCloseModal={handleCloseModal} />
+        <AddBookingForm handleCloseModal={handleCloseModal} />
         <button onClick={handleCloseModal}>X</button>
       </dialog>
       <button onClick={handleOpenModal}>Add Booking</button>

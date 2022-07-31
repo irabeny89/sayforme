@@ -10,7 +10,7 @@ import { tokenPayloadVar } from "utils/api/graphql/client/reactiveVariables";
 export default function BookingHandleButton({
   bookingId,
   handlerId,
-}: BookingHandleButtonT) {
+}: BookingHandleButtonPropsT) {
   const payload = useReactiveVar(tokenPayloadVar),
     // when double-inverted it returns false for customer role
     isPermitted = payload?.role !== "CUSTOMER" && !handlerId,
@@ -25,7 +25,7 @@ export default function BookingHandleButton({
   useEffect(() => {
     const timerId = setTimeout(reset, 5e4);
     return clearTimeout(timerId);
-  }, [error]);
+  }, [error, reset]);
 
   return (
     <div>

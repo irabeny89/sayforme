@@ -18,7 +18,7 @@ export default function BookingCompleteButton({
     isPermitted =
       payload?.role !== "CUSTOMER" &&
       status === "PENDING" &&
-      Date.now() <= +callOn,
+      Date.now() >= +callOn,
     [completeCall, { loading, error, reset }] = useMutation<
       Record<"completeCall", string>,
       BookingCompleteButtonVariableT
@@ -46,18 +46,28 @@ export default function BookingCompleteButton({
       <dialog open={openModal}>
         <h3>Complete Call</h3>
         <p>
-          Call completed. Optional, add a remark/note for the call booking
-          owner.
+          Optional, add a remark/note for the call booking owner either because
+          of success or failed calls.
         </p>
         <form onSubmit={handleSubmit}>
-          <textarea
-            name="remark"
-            placeholder="Any remark or note for the owner"
-          />
+          <fieldset>
+            <legend>Optional</legend>
+            <label>
+              Remark:
+              <div>
+                <textarea
+                  name="remark"
+                  placeholder="Any remark or note for the owner"
+                />
+              </div>
+            </label>
+          </fieldset>
+          <br />
           <button type="submit" disabled={loading}>
             Completed Call
           </button>
         </form>
+        <br />
         <button onClick={() => setOpenModal(false)}>X</button>
       </dialog>
       {error && <i>{error5xx}</i>}

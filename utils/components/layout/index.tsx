@@ -35,7 +35,7 @@ export default function Layout({ children }: LayoutProps) {
     tokenPayloadVar(verifiedPayload as SignAndGetTokenT | undefined | null);
     // redirect to home page for unauth users
     isProtected && !verifiedPayload && router.push("/");
-  }, [pageName, token]);
+  }, [pageName, token, router]);
 
   return (
     <main>
@@ -44,7 +44,9 @@ export default function Layout({ children }: LayoutProps) {
       </Head>
       <Header />
       {token && <button onClick={handleLogout}>Logout</button>}
+      <br />
       {children}
+      <br />
       <Footer />
     </main>
   );
