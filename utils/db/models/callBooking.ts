@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
-
-type CallBookingDocumentT = mongoose.Document & CallBookingT;
+import type { CallBookingDocumentT, CallBookingModelT } from "typings/mixTypes";
 
 const schema = new mongoose.Schema(
   {
@@ -26,6 +25,5 @@ const schema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default (mongoose.models
-  .CallBooking as mongoose.Model<CallBookingDocumentT>) ||
+export default (mongoose.models.CallBooking as CallBookingModelT) ||
   mongoose.model<CallBookingDocumentT>("CallBooking", schema);

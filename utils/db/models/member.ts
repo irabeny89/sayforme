@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
-
-type MemberDocumentT = mongoose.Document & MemberT
+import { MemberModelT, MemberDocumentT } from "typings/mixTypes";
 
 const schema = new mongoose.Schema(
   {
@@ -30,5 +29,5 @@ const schema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default (mongoose.models.Member as mongoose.Model<MemberDocumentT>) ||
+export default (mongoose.models.Member as MemberModelT) ||
   mongoose.model<MemberDocumentT>("Member", schema);

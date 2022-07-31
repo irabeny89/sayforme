@@ -1,18 +1,12 @@
-import type { GqlContext } from "../../context";
 import { ApolloError } from "apollo-server-micro";
 import { error5xx } from "config";
-
-type HandleRequestT = {
-  CallBooking: GqlContext["CallBooking"];
-  role: RoleT;
-  userId: string;
-};
+import type { BookingHandlerArgsT, GqlContext } from "typings/mixTypes";
 
 async function handleRequest({
   CallBooking,
   role,
   userId: owner,
-}: HandleRequestT) {
+}: BookingHandlerArgsT) {
   if (role === "CUSTOMER")
     return await CallBooking.find({ owner }).populate("owner handler").exec();
   return (await CallBooking.find().populate("owner handler").exec()) ?? [];

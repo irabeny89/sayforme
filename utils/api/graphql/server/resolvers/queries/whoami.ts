@@ -1,8 +1,8 @@
-import type { GqlContext } from "../../context";
 import { ApolloError } from "apollo-server-micro";
 import { error5xx } from "config";
+import { GqlContext, MemberModelT } from "typings/mixTypes";
 
-async function handleRequest(Member: GqlContext["Member"], email: string) {
+async function handleRequest(Member: MemberModelT, email: string) {
   return await Member.findOne({ email }).select("-hashedPassword -salt").exec();
 }
 function handleError(error: any) {

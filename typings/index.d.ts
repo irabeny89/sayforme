@@ -64,7 +64,7 @@ type BookingQueryT = Record<"getCallBooking", BookingTablePropsT>;
 
 type BookingFormQueryVariablesT = Record<"booking", CallBookingInputT>;
 
-type BookingFormPropsT = {
+type AddBookingFormPropsT = {
   handleCloseModal: () => void;
 };
 
@@ -94,7 +94,9 @@ type BookingCompleteButtonPropsT = {
   callOn: string;
 };
 
-type BookingHandleButtonT = {
+type BookingHandleButtonPropsT = {
   bookingId: string;
   handlerId: string | undefined;
 };
+
+type BookingEditButtonPropsT = { bookingId: string } & CallBookingInputT;

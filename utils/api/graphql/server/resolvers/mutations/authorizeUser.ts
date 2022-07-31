@@ -1,17 +1,19 @@
-import type { GqlContext } from "../../context";
 import { ApolloError, ForbiddenError } from "apollo-server-micro";
 import { error5xx } from "config";
+import type { GqlContext, MemberModelT } from "typings/mixTypes";
 
 async function handleRequest(
-  Member: GqlContext["Member"],
+  Member: MemberModelT,
   role: RoleT,
   userId: string
 ) {
   if (role !== "ADMIN") throw new ForbiddenError(error5xx);
-  const operator = await Member.findByIdAndUpdate(userId, { $set: { role: "OPERATOR" } })
+  const operator = await Member.findByIdAndUpdate(userId, {
+    $set: { role: "OPERATOR" },
+  })
     .select("id")
     .exec();
-    return operator?.id
+  return operator?.id;
 }
 
 function handleError(error: any) {

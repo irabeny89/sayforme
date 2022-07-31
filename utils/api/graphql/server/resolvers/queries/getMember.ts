@@ -1,9 +1,9 @@
-import type { GqlContext } from "../../context";
 import { ApolloError, ForbiddenError } from "apollo-server-micro";
 import { error5xx } from "config";
+import { GqlContext, MemberModelT } from "typings/mixTypes";
 
 async function handleRequest(
-  Member: GqlContext["Member"],
+  Member: MemberModelT,
   role: RoleT,
   userId: string
 ) {

@@ -1,10 +1,6 @@
-import type { GqlContext } from "../../context";
 import { ApolloError, ForbiddenError } from "apollo-server-micro";
 import { error5xx } from "config";
-
-type HandleRequestArgT = Record<"role" | "bookingId" | "userId", string> &
-  Pick<GqlContext, "CallBooking"> &
-  Partial<Record<"remark", string>>;
+import type { CallHandlerArgsT, GqlContext } from "typings/mixTypes";
 
 async function handleRequest({
   CallBooking,
@@ -12,7 +8,7 @@ async function handleRequest({
   role,
   remark,
   userId: handler,
-}: HandleRequestArgT) {
+}: CallHandlerArgsT) {
   if (role === "CUSTOMER") throw new ForbiddenError(error5xx);
   const update = await CallBooking.findOneAndUpdate(
     { id, handler },

@@ -1,10 +1,10 @@
-import type { GqlContext } from "../../context";
 import { ApolloError } from "apollo-server-micro";
 import { error5xx } from "config";
+import type { CallBookingModelT, GqlContext } from "typings/mixTypes";
 
 async function handleRequest(
   owner: string,
-  CallBooking: GqlContext["CallBooking"],
+  CallBooking: CallBookingModelT,
   booking: CallBookingInputT
 ) {
   const { id } = await CallBooking.create({ ...booking, owner });

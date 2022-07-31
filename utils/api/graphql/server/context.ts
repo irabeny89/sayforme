@@ -1,22 +1,8 @@
 import Member from "@/models/member";
 import CallBooking from "@/models/callBooking";
-import { NextApiResponse } from "next";
-import { MicroRequest } from "apollo-server-micro/dist/types";
 import startDb from "utils/db";
 import verifyJwtToken from "utils/verifyJwtToken";
-
-export type GqlContext = {
-  Member: typeof Member;
-  CallBooking: typeof CallBooking;
-  token: string;
-  payload: SignAndGetTokenT;
-  res: NextApiResponse;
-};
-
-type GqlContextArgs = {
-  req: MicroRequest;
-  res: NextApiResponse;
-};
+import type { GqlContext, GqlContextArgs } from "typings/mixTypes";
 
 const context = async ({
   req: { headers },

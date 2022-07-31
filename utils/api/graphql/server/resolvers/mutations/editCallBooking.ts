@@ -1,20 +1,13 @@
-import type { GqlContext } from "../../context";
 import { ApolloError } from "apollo-server-micro";
 import { error5xx } from "config";
-
-type HandleRequestArgT = {
-  CallBooking: GqlContext["CallBooking"];
-  booking: CallBookingInputT;
-  bookingId: string;
-  userId: string;
-};
+import type { EditBookingHandlerArgsT, GqlContext } from "typings/mixTypes";
 
 async function handleRequest({
   CallBooking,
   booking,
   bookingId: id,
   userId: owner,
-}: HandleRequestArgT) {
+}: EditBookingHandlerArgsT) {
   const update = await CallBooking.findOneAndUpdate(
     { id, owner },
     {
