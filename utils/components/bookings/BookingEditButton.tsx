@@ -2,14 +2,19 @@ import { useMutation, useReactiveVar } from "@apollo/client";
 import { error5xx } from "config";
 import { FormEvent, useEffect, useState } from "react";
 import {
+  BOOKINGS_TABLE,
   EDIT_CALL_BOOKING,
   GET_CALL_BOOKING,
 } from "utils/api/graphql/client/documentNode";
 import { tokenPayloadVar } from "utils/api/graphql/client/reactiveVariables";
+import BookingForm from "./BookingForm";
 
 export default function BookingEditButton({
   bookingId,
-}: Record<"bookingId", string>) {
+  callOn,
+  message,
+  recipientLine,
+}: BookingEditButtonPropsT) {
   const payload = useReactiveVar(tokenPayloadVar),
     [openModal, setOpenModal] = useState(false),
     // when double-inverted it returns false for customer role
@@ -21,13 +26,12 @@ export default function BookingEditButton({
     handleModalClose = () => setOpenModal(false),
     handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      const { bookingId, ...booking } = Object.fromEntries(
+      const booking = Object.fromEntries(
         new FormData(e.currentTarget)
-      ) as unknown as BookingEditButtonVariableT["booking"] &
-        Record<"bookingId", string>;
+      ) as unknown as BookingEditButtonVariableT["booking"];
       await editBooking({
         variables: { bookingId, booking },
-        refetchQueries: [GET_CALL_BOOKING],
+        refetchQueries: [GET_CALL_BOOKING, BOOKINGS_TABLE],
       });
       handleModalClose();
     };
@@ -35,24 +39,16 @@ export default function BookingEditButton({
   useEffect(() => {
     const timerId = setTimeout(reset, 5e4);
     return clearTimeout(timerId);
-  }, [error]);
+  }, [error, reset]);
 
   return (
     <div>
       <dialog open={openModal}>
         <h3>Edit Call Booking</h3>
         <p>Edit the call booking using the form below:</p>
-        <form onSubmit={handleSubmit}>
-          <input name="recipientLine" placeholder="Recipient line" required />
-          <input name="callOn" type="datetime-local" required />
-          <textarea
-            name="message"
-            placeholder="Any remark or note for the owner"
-          />
-          <button type="submit" disabled={loading}>
-            Completed Call
-          </button>
-        </form>
+        <BookingForm
+          {...{ error, handleSubmit, loading, callOn, message, recipientLine }}
+        />
         <button onClick={() => setOpenModal(false)}>X</button>
       </dialog>
       {error && <i>{error5xx}</i>}

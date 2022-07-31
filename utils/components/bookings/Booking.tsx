@@ -32,7 +32,7 @@ export default function Booking({ bookingId }: Record<"bookingId", string>) {
         <p>Full booking details list</p>
         <BookingHandleButton bookingId={bookingId} handlerId={handler?.id} />
         <BookingCompleteButton {...{ bookingId, status, callOn }} />
-        <BookingEditButton bookingId={bookingId} />
+        <BookingEditButton {...{ bookingId, callOn, message, recipientLine }} />
         <dl>
           <dt>Booking ID:</dt>
           <dd>{bookingId}</dd>
