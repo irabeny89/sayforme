@@ -1,3 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "SFPro";
+  src: url("../public/fonts/sfprodisplay/SFPRODISPLAYREGULAR.OTF");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SFPro";
+  src: url("../public/fonts/sfprodisplay/SFPRODISPLAYBOLD.OTF");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SFPro";
+  src: url("../public/fonts/sfprodisplay/SFPRODISPLAYHEAVYITALIC.OTF");
+  font-weight: normal;
+  font-style: italic;
+}
+
 html,
 body {
   padding: 0;

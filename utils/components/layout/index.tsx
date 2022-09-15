@@ -38,7 +38,7 @@ export default function Layout({ children }: LayoutProps) {
   }, [pageName, token, router]);
 
   return (
-    <main>
+    <main className="font-sfpro">
       <Head>
         <title>{pageName}</title>
       </Head>

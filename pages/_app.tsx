@@ -1,3 +1,4 @@
+import "styles/globals.css";
 import type { AppProps } from "next/app";
 import Layout from "utils/components/layout";
 import ErrorBoundary from "utils/components/ErrorBoundary";
