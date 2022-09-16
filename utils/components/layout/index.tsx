@@ -48,7 +48,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <main
       data-theme={theme}
-      className="font-sfpro bg-base-200 text-base-content"
+      className="font-sfpro bg-base-200 text-base-content px-5"
     >
       <Head>
         <title>{pageName}</title>
@@ -57,7 +57,14 @@ export default function Layout({ children }: LayoutProps) {
       <button onClick={toggleTheme} className={themeBtnClassName}>
         {isLightMode ? <MdDarkMode size="20" /> : <MdLightMode size="20" />}
       </button>
-      {token && <button onClick={handleLogout}>Logout</button>}
+      {token && (
+        <button
+          onClick={handleLogout}
+          className="btn btn-xs bg-error border-0 shadow-md"
+        >
+          Logout
+        </button>
+      )}
       <br />
       {children}
       <br />
