@@ -6,12 +6,17 @@ const { intro } = appData;
 
 const Home: NextPage = () => {
   return (
-    <div>
-      <h2>Introduction</h2>
+    <div className="min-h-screen mt-10 space-y-10">
+      <h2 className="text-xl underline">Introduction</h2>
       <p>{intro[0]}</p>
-      <div>
-        <Link href="/register">Register</Link> or{" "}
-        <Link href="/login">Login</Link>
+      <div className="flex gap-2">
+        <div className="underline">
+          <Link href="/register">Register</Link>
+        </div>
+        |
+        <div className="underline">
+          <Link href="/login">Login</Link>
+        </div>
       </div>
     </div>
   );
