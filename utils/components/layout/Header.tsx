@@ -2,47 +2,45 @@ import Link from "next/link";
 import { appData } from "config";
 import { useReactiveVar } from "@apollo/client";
 import { tokenPayloadVar } from "utils/api/graphql/client/reactiveVariables";
+import usePageTitle from "utils/hooks/usePageTitle";
 
-const { appName } = appData;
+const { appName, pages, adminAccessPages, userPrivatePages, publicPages } =
+  appData;
 
 export default function Header() {
-  const payload = useReactiveVar(tokenPayloadVar),
-    isAdmin = payload?.role === "ADMIN";
-
+  const payload = useReactiveVar(tokenPayloadVar);
+  const isAdmin = payload?.role === "ADMIN";
+  const isUser = payload?.email;
+  const currentPageTitle = usePageTitle();
+  const commonClassName = "hover:bg-white cursor-pointer p-1";
+  const getTabClassName = (title: string) =>
+    currentPageTitle === title.toUpperCase()
+      ? commonClassName + " border-b-2 border-secondary"
+      : commonClassName;
+  const confirmUserAccess = (title: string) =>
+    (adminAccessPages.includes(title) && isAdmin) ||
+    (userPrivatePages.includes(title) && isUser);
+    
   return (
-    <header>
+    <header className="p-3 flex justify-between">
       <h1>
         <Link href="/">{appName}</Link>
       </h1>
       <nav>
-        <ul>
-          <li>
-            <Link href="/">Home</Link>
-          </li>
-          <li>
-            <Link href="/register">Register</Link>
-          </li>
-          <li>
-            <Link href="/login">Login</Link>
-          </li>
-          {isAdmin && (
-            <li>
-              <Link href="/users">Users</Link>
-            </li>
+        <ul className="flex gap-2">
+          {pages.map(({ route, title }) =>
+            confirmUserAccess(title) ? (
+              <Link key={title} href={route}>
+                <li className={getTabClassName(title)}>{title}</li>
+              </Link>
+            ) : (
+              publicPages.includes(title) && (
+                <Link key={title} href={route}>
+                  <li className={getTabClassName(title)}>{title}</li>
+                </Link>
+              )
+            )
           )}
-          {payload?.email && (
-            <li>
-              <Link href="/bookings">Bookings</Link>
-            </li>
-          )}
-          {payload?.email && (
-            <li>
-              <Link href="/profile">Profile</Link>
-            </li>
-          )}
-          <li>
-            <Link href="/about">About</Link>
-          </li>
         </ul>
       </nav>
     </header>
