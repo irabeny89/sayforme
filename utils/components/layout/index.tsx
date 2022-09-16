@@ -30,7 +30,7 @@ export default function Layout({ children }: LayoutProps) {
       tokenVar(""),
       router.push("/").then(() => location.reload())
     ),
-    toggleTheme = () => themeVar(theme === "light" ? "dark" : "light");
+    toggleTheme = () => themeVar(theme === "light" ? "halloween" : "light");
 
   useEffect(() => {
     // if current page name is a protected page
