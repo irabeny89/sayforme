@@ -14,7 +14,7 @@ export const envVariables = {
 
 export const appData = {
   appName: "SayForMe",
-  version: "1.0",
+  version: "0.1",
   intro: [
     "If you want to call someone but you don't want to forget especially because it's their birthday, love message or something, then let SayForMe do it for you. Be a member today and register or login if you're already a member.",
   ],
@@ -22,4 +22,16 @@ export const appData = {
     "SayForMe is a call booking/reservation app designed to help people make calls that they don't want to make or couldn't make, perhaps because of tight schedules or for some other reasons.",
   ],
   year: "2022",
+  pages: [
+    { title: "Home", route: "/" },
+    { title: "Register", route: "/register" },
+    { title: "Login", route: "/login" },
+    { title: "Users", route: "/users" },
+    { title: "Bookings", route: "/bookings" },
+    { title: "Profile", route: "/profile" },
+    { title: "About", route: "/about" },
+  ],
+  adminAccessPages: ["Users"],
+  userPrivatePages: ["Bookings", "Profile"],
+  publicPages: ["Home", "Register", "Login", "About"]
 };
