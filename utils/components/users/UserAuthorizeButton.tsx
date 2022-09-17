@@ -26,7 +26,7 @@ export default function UserAuthorizeButton({
   return (
     <div>
       <button
-        className="btn btn-sm border-0 bg-success"
+        className="btn btn-sm border-0 bg-primary"
         onClick={() => authorize()}
         disabled={loading}
       >
