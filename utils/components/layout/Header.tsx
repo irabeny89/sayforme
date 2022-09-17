@@ -32,9 +32,9 @@ export default function Header() {
     <header className="py-5 flex justify-between">
       <h1 className="text-2xl font-bold">
         <Link href="/">
-          <>
+          <div className="cursor-pointer">
             <GiNothingToSay /> {appName}
-          </>
+          </div>
         </Link>
       </h1>
       <nav className="relative">
