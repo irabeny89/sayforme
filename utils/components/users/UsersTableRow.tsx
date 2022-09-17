@@ -13,7 +13,7 @@ export default function UsersTableRow({
       <td>{role}</td>
       <td>{username}</td>
       <td>{email}</td>
-      <td>
+      <td className="underline">
         <Link href={`/users/${id}`}>View</Link>
       </td>
     </tr>

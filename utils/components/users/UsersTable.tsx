@@ -18,9 +18,8 @@ export default function UsersTable() {
       <i>No Members yet.</i>
     </small>
   ) : (
-    <small>
-      <table>
-        <caption>All Users</caption>
+    <div className="overflow-x-auto">
+      <table className="table table-zebra table-compact w-full">
         <thead>
           <tr>
             <th>#</th>
@@ -36,6 +35,6 @@ export default function UsersTable() {
           ))}
         </tbody>
       </table>
-    </small>
+    </div>
   );
 }
