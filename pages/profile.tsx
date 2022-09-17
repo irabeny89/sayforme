@@ -9,23 +9,42 @@ export default function Profile() {
   if (data) {
     const { createdAt, email, id, role, updatedAt, username } = data.whoami;
     return (
-      <div>
-        <h2>User Details</h2>
-        <p>Details of the user on the platform.</p>
-        <dl>
-          <dt>ID</dt>
-          <dd>{id}</dd>
-          <dt>Role</dt>
-          <dd>{role}</dd>
-          <dt>Username</dt>
-          <dd>{username}</dd>
-          <dt>Email</dt>
-          <dd>{email}</dd>
-          <dt>Joined on</dt>
-          <dd>{createDateString(createdAt)}</dd>
-          <dt>Updated At</dt>
-          <dd>{createDateString(updatedAt)}</dd>
-        </dl>
+      <div className="min-h-screen mt-10 space-y-10">
+        <h2 className="text-xl underline">User Details</h2>
+        <div className="space-y-5 sm:w-1/2 mx-auto">
+          <p>Details of the user on the platform.</p>
+          <dl className="space-y-3">
+            <div>
+              <dt className="text-xs">ID</dt>
+              <dd>{id}</dd>
+              <hr />
+            </div>
+            <div>
+              <dt className="text-xs">Role</dt>
+              <dd>{role}</dd>
+              <hr />
+            </div>
+            <div>
+              <dt className="text-xs">Username</dt>
+              <dd>{username}</dd>
+              <hr />
+            </div>
+            <div>
+              <dt className="text-xs">Email</dt>
+              <dd>{email}</dd>
+              <hr />
+            </div>
+            <div>
+              <dt className="text-xs">Joined on</dt>
+              <dd>{createDateString(createdAt)}</dd>
+              <hr />
+            </div>
+            <div>
+              <dt className="text-xs">Updated At</dt>
+              <dd>{createDateString(updatedAt)}</dd>
+            </div>
+          </dl>
+        </div>
       </div>
     );
   }
@@ -35,7 +54,9 @@ export default function Profile() {
     </small>
   ) : error ? (
     <small>
-      <i>{error5xx} <Link href="/">Go Home page</Link></i>
+      <i>
+        {error5xx} <Link href="/">Go Home page</Link>
+      </i>
     </small>
   ) : null;
 }
