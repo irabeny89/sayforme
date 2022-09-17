@@ -2,7 +2,6 @@ import { useMutation } from "@apollo/client";
 import { error5xx } from "config";
 import { useEffect } from "react";
 import {
-  AUTHORIZE_USER,
   DENY_USER,
   GET_MEMBER,
   MEMBERS,
@@ -20,11 +19,15 @@ export default function UserDenyButton({ userId }: Record<"userId", string>) {
   useEffect(() => {
     const timerId = setTimeout(reset, 5e4);
     return clearTimeout(timerId);
-  }, [error]);
+  }, [error, reset]);
 
   return (
     <div>
-      <button onClick={() => deny()} disabled={loading}>
+      <button
+        className="btn btn-sm border-0"
+        onClick={() => deny()}
+        disabled={loading}
+      >
         Deny
       </button>
       {error && (
