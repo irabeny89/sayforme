@@ -1,6 +1,8 @@
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import Bookings from "utils/components/bookings";
-import Booking from "utils/components/bookings/Booking";
+
+const Booking = dynamic(() => import("utils/components/bookings/Booking"));
 
 export default function BookingRoutes() {
   const { query } = useRouter(),
