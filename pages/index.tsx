@@ -8,7 +8,7 @@ const Home: NextPage = () => {
   return (
     <div className="min-h-screen mt-10 space-y-10">
       <h2 className="text-xl underline">Introduction</h2>
-      <p>{intro[0]}</p>
+      <p className="space-y-5 sm:w-1/2 mx-auto">{intro[0]}</p>
       <div className="flex gap-2">
         <div className="underline">
           <Link href="/register">Register</Link>
