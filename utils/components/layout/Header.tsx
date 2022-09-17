@@ -40,7 +40,7 @@ export default function Header() {
       <nav className="relative">
         <MdMenu size={20} onClick={toggler} className={menuBtnClassName} />
         {toggleFlag && (
-          <ul className="sm:flex absolute bg-base-300 sm:bg-inherit right-0 sm:static w-32 sm:w-auto space-y-3 sm:space-y-0 p-2 sm:p-0 gap-3">
+          <ul className="sm:flex absolute z-10 bg-base-300 sm:bg-inherit right-0 sm:static w-32 sm:w-auto space-y-3 sm:space-y-0 p-2 sm:p-0 gap-3">
             {pages.map(({ route, title }) =>
               confirmUserAccess(title) ? (
                 <Link key={title} href={route}>
