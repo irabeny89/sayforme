@@ -31,7 +31,11 @@ export default function BookingHandleButton({
     <div>
       {error && <i>{error5xx}</i>}
       {!!isPermitted && (
-        <button onClick={() => handleCallBooking()} disabled={loading}>
+        <button
+          onClick={() => handleCallBooking()}
+          disabled={loading}
+          className="btn btn-sm bg-primary"
+        >
           {loading ? <i>wait...</i> : "Handle"}
         </button>
       )}
