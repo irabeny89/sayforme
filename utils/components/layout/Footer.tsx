@@ -4,7 +4,7 @@ const { appName, year } = appData;
 
 export default function Footer() {
   return (
-    <footer>
+    <footer className="border-t">
       {appName} &copy; {year}
     </footer>
   );
