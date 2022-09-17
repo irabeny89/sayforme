@@ -43,36 +43,42 @@ export default function BookingCompleteButton({
 
   return (
     <div>
-      <dialog open={openModal}>
-        <h3>Complete Call</h3>
-        <p>
+      <dialog open={openModal} className="w-full max-w-xs">
+        <button
+          onClick={() => setOpenModal(false)}
+          className="text-secondary float-right"
+        >
+          X
+        </button>
+        <h3>Complete Call</h3><hr />
+        <p className="mt-5">
           Optional, add a remark/note for the call booking owner either because
           of success or failed calls.
         </p>
-        <form onSubmit={handleSubmit}>
-          <fieldset>
-            <legend>Optional</legend>
-            <label>
-              Remark:
-              <div>
-                <textarea
-                  name="remark"
-                  placeholder="Any remark or note for the owner"
-                />
-              </div>
-            </label>
-          </fieldset>
-          <br />
-          <button type="submit" disabled={loading}>
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <textarea
+            name="remark"
+            placeholder="Any remark or note for the owner"
+            className="w-full max-w-xs textarea textarea-bordered mt-5"
+          />
+          <button
+            type="submit"
+            disabled={loading}
+            className="btn btn-sm bg-success border-0 shadow-md"
+          >
             Completed Call
           </button>
         </form>
         <br />
-        <button onClick={() => setOpenModal(false)}>X</button>
       </dialog>
       {error && <i>{error5xx}</i>}
       {!!isPermitted && (
-        <button onClick={() => setOpenModal(true)}>Complete</button>
+        <button
+          onClick={() => setOpenModal(true)}
+          className="btn btn-sm bg-success border-0 shadow-md"
+        >
+          Complete
+        </button>
       )}
     </div>
   );
