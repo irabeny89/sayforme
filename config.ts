@@ -16,7 +16,7 @@ export const appData = {
   appName: "SayForMe",
   version: "0.1",
   intro: [
-    "If you want to call someone but you don't want to forget especially because it's their birthday, perhaps, love message or something, then let SayForMe do it for you. Be a member today and register or login if you're already a member.",
+    "If you want to call someone but you don't want to forget especially because it's their birthday, perhaps, love message or something, then let SayForMe do it for you.", "Be a member today and register or login if you're already a member."
   ],
   about: [
     "SayForMe is a call booking/reservation app designed to help people make calls that they don't want to make or couldn't make, perhaps because of tight schedules or for some other reasons.",
