@@ -14,7 +14,7 @@ export default function BookingTableRow({
       <td>{status}</td>
       <td>{createDateString(callOn)}</td>
       <td>{recipientLine}</td>
-      <td>
+      <td className="underline">
         <Link href={`/bookings/${bookingId}`}>View</Link>
       </td>
     </tr>

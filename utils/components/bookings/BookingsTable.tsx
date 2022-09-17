@@ -15,8 +15,8 @@ export default function BookingsTable() {
       <i>No booking yet</i>
     </small>
   ) : (
-    <small>
-      <table>
+    <div className="overflow-x-auto">
+      <table className="table table-zebra table-compact w-full">
         <thead>
           <tr>
             <th>#</th>
@@ -32,6 +32,6 @@ export default function BookingsTable() {
           ))}
         </tbody>
       </table>
-    </small>
+    </div>
   );
 }
