@@ -1,18 +1,11 @@
 import {
-  Dispatch,
-  SetStateAction,
   useEffect,
   useState,
 } from "react";
-import { NextRouter, useRouter } from "next/router";
+import { useRouter } from "next/router";
 import createSubmitHandler from "./createSubmitHandler";
 import clearErrorMessage from "./clearErrorMessage";
-
-export type HookT = {
-  setIsLoading: Dispatch<SetStateAction<boolean>>;
-  setErrorMessage: Dispatch<SetStateAction<string>>;
-  router: NextRouter;
-};
+import { HookT } from "typings/mixTypes";
 
 export type HandleResponseT = HookT & Record<"status" | "data", string>;
 

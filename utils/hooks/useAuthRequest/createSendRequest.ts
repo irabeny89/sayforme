@@ -1,4 +1,4 @@
-import type { HookT } from ".";
+import { HookT } from "typings/mixTypes";
 import sendRequest from "./sendRequest";
 
 export default function createSendRequest(hooks: HookT) {

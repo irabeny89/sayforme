@@ -1,7 +1,6 @@
-import { NextRouter } from "next/router";
-import { Dispatch, FormEvent, SetStateAction } from "react";
+import { FormEvent } from "react";
+import { HookT } from "typings/mixTypes";
 import createSendRequest from "./createSendRequest";
-import type { HookT } from ".";
 
 export default function createSubmitHandler({
   setIsLoading,

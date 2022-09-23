@@ -46,3 +46,9 @@ type EditBookingHandlerArgsT = {
   bookingId: string;
   userId: string;
 };
+
+type HookT = {
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
+  setErrorMessage: Dispatch<SetStateAction<string>>;
+  router: NextRouter;
+};
