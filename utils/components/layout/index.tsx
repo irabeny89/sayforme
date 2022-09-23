@@ -4,7 +4,7 @@ import Header from "./Header";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import getPageName from "utils/getPageName";
-import { SAYFORMETOKEN, SAYFORME_THEME_KEY } from "config";
+import { SAYFORME_TOKEN_KEY, SAYFORME_THEME_KEY } from "config";
 import {
   tokenPayloadVar,
   tokenVar,
@@ -25,7 +25,7 @@ export default function Layout({ children }: LayoutProps) {
     isLightMode ? "bg-base-content text-white" : "text-warning bg-slate-100"
   }`;
   const handleLogout = () => (
-    localStorage.removeItem(SAYFORMETOKEN),
+    localStorage.removeItem(SAYFORME_TOKEN_KEY),
     tokenVar(""),
     router.push("/").then(() => location.reload())
   );
@@ -41,7 +41,7 @@ export default function Layout({ children }: LayoutProps) {
   useEffect(() => {
     // if current page name is a protected page
     const isProtected = ["BOOKINGS", "USERS"].includes(pageName),
-      token = localStorage.getItem(SAYFORMETOKEN),
+      token = localStorage.getItem(SAYFORME_TOKEN_KEY),
       verifiedPayload = verifyJwtToken(token);
     // if valid token exists, set on global state
     tokenVar(token ?? "");
