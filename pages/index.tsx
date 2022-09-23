@@ -10,7 +10,7 @@ const Home: NextPage = () => {
       <h2 className="text-xl underline">Introduction</h2>
       <p className="space-y-5 sm:w-1/2 mx-auto">
         {intro.map((p, i) => (
-          <p key={i}>{p}</p>
+          <div key={i}>{p}</div>
         ))}
       </p>
       <div className="flex gap-2">
