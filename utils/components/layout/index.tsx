@@ -1,12 +1,11 @@
-import { ReactNode, useEffect } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import getPageName from "utils/getPageName";
-import { SAYFORMETOKEN } from "config";
+import { SAYFORMETOKEN, SAYFORME_THEME_KEY } from "config";
 import {
-  themeVar,
   tokenPayloadVar,
   tokenVar,
 } from "utils/api/graphql/client/reactiveVariables";
@@ -17,21 +16,28 @@ import { MdLightMode, MdDarkMode } from "react-icons/md";
 type LayoutProps = { children: ReactNode };
 
 export default function Layout({ children }: LayoutProps) {
-  const router = useRouter(),
-    pageName = getPageName(router.asPath),
-    theme = useReactiveVar(themeVar),
-    isLightMode = theme === "light",
-    token = useReactiveVar(tokenVar),
-    themeBtnClassName = `shadow p-1 float-right mr-2 ${
-      isLightMode ? "bg-base-content text-white" : "text-warning bg-slate-100"
-    }`,
-    handleLogout = () => (
-      localStorage.removeItem(SAYFORMETOKEN),
-      tokenVar(""),
-      router.push("/").then(() => location.reload())
-    ),
-    toggleTheme = () => themeVar(theme === "light" ? "halloween" : "light");
-
+  const router = useRouter();
+  const pageName = getPageName(router.asPath);
+  const [theme, setTheme] = useState<null | string>();
+  const isLightMode = theme === "light";
+  const token = useReactiveVar(tokenVar);
+  const themeBtnClassName = `shadow p-1 float-right mr-2 ${
+    isLightMode ? "bg-base-content text-white" : "text-warning bg-slate-100"
+  }`;
+  const handleLogout = () => (
+    localStorage.removeItem(SAYFORMETOKEN),
+    tokenVar(""),
+    router.push("/").then(() => location.reload())
+  );
+  /**
+   * Toggle themes between `halloween` and `light` and stores it in `localStorage`.
+   */
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "halloween" : "light";
+    setTheme(newTheme);
+    localStorage.setItem(SAYFORME_THEME_KEY, newTheme);
+  };
+  // handle page protection
   useEffect(() => {
     // if current page name is a protected page
     const isProtected = ["BOOKINGS", "USERS"].includes(pageName),
@@ -44,6 +50,11 @@ export default function Layout({ children }: LayoutProps) {
     // redirect to home page for unauth users
     isProtected && !verifiedPayload && router.push("/");
   }, [pageName, token, router]);
+
+  // handle theme settings
+  useEffect(() => {
+    setTheme(localStorage.getItem(SAYFORME_THEME_KEY));
+  }, []);
 
   return (
     <main

@@ -4,6 +4,8 @@ export const error5xx = "Something went wrong.";
 
 export const SAYFORMETOKEN = "sayforme";
 
+export const SAYFORME_THEME_KEY = "sayforme_theme"
+
 export const envVariables = {
   dbAtlasVercel: process.env.MONGODB_URI!,
   dbAtlas: process.env.MONGO_ATLAS!,
